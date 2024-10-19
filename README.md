@@ -1,8 +1,9 @@
 # Athena
-<div style="text-align:center;">
+<div align="center">
     <img src="pics/logo.png" alt="athena logo" style="width:100px;">
     <p><strong>基于多资产的因子回测框架</strong></p>
 </div>
+
 
 ## 概览
 Athena是一款简单的多资产回测工具，基于事件型回测框架，拥有非常简单的程序结构，易于上手。
