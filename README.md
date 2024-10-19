@@ -1,6 +1,7 @@
 # Athena
 <div align="center">
-    <img src="pics/logo.png" alt="athena logo" style="width:100px;">
+    <img src="pics/logo.png" alt="athena logo" style="width:150px;">
+    <p></p>
     <p><strong>基于多资产的因子回测框架</strong></p>
 </div>
 
