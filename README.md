@@ -20,7 +20,13 @@ Athena是一款简单的多资产回测工具，基于事件型回测框架，�
 ## 开始使用
 和其他常用事件型回测框架一样，我们需要先创建一个策略类，然后实例化一个回测类，并传入策略类以及回测参数。
 
-类似的，用户新建的策略需要继承自Strategy基类，并且重写init和next方法。
+需要注意的是如果要使用rqdatac这种第三方接口获取数据，需要自己创建个.env，通过dotenv来读取你的账号和密码进行验证。接口详情可以参考athena/data.py
+```python
+RQDATA_USERNAME = xxx
+RQDATA_PASSWORD = xxx
+```
+
+类似的，用户新建的策略需要继承自Strategy基类，并且重写init和next方法
 
 ```python
 from athena import Strategy, Backtest
@@ -42,7 +48,7 @@ backtest.run()
 ```
 
 ## TODO
-1. 完成测试板块
-2. 完成对一些数据接口的支持
-3. 基于这个框架梳理所有常见因子研究
-4. MODE的开发
+- [ ] 完成测试板块
+- [x] 完成对一些数据接口的支持(目前已支持rqdatac)
+- [ ] 基于这个框架梳理所有常见因子研究
+- [ ] MODE的开发

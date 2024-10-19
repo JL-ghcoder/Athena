@@ -3,6 +3,6 @@ sync.sh
 .DS_Store
 .vscode
 
-.env
+*.env
 
 __pycache__/
