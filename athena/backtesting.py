@@ -45,6 +45,10 @@ class Strategy(ABC):
         if isnan(price) or price <= 0 or (size is not None and (isnan(size) or size <= .0)):
             return False
 
+        if size > 0 and size <= 1:
+            # 可用现金*分数/价格
+            size = size * self.cash / (price * (1 + self.commission))
+
         if size is None: # 全仓
             size = self.cash / (price * (1 + self.commission))
             open_cost = self.cash
@@ -97,6 +101,33 @@ class Strategy(ABC):
             self.cash += position.current_value - close_cost
 
         return True
+
+    def current_position_status(self):
+        long_positions = []
+        short_positions = []
+        for position in self.open_positions:
+            # 多头仓位
+            if position.is_short == False:
+                long_positions.append(position.symbol)
+            else:
+                short_positions.append(position.symbol)
+    
+        return long_positions, short_positions
+
+    def current_position_count(self):
+
+        long_c = 0
+        short_c = 0
+        
+        for position in self.open_positions:
+            # 多头仓位
+            if position.is_short == False:
+                long_c += 1
+            else:
+                short_c += 1
+                
+        return long_c, short_c
+
 
     def __eval(self, *args, **kwargs):
         self.cumulative_return = self.cash

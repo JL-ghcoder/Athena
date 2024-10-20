@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import timedelta
 
 def sort_the_factor(factor_data, factor, ascending=False):
     # 排序截面因子数据，默认从高到低
@@ -22,3 +23,36 @@ def sort_the_factor(factor_data, factor, ascending=False):
 
     sorted_factor_series = selected_factor_series.sort_values(by=selected_factor_series.columns[0], ascending=ascending)
     return sorted_factor_series
+
+# 修饰符
+def run_weekly(method):
+    def wrapper(self, i, record):
+        # 获取当前日期
+        date = self.data.index[i]
+        
+        # 检查是否达到下次运行时间
+        if not hasattr(self, '_next_run_date') or date >= self._next_run_date:
+            # 执行被装饰的方法
+            result = method(self, i, record)
+            
+            self._next_run_date = date + timedelta(days=7)
+            
+            return result
+        
+    return wrapper
+
+def run_monthly(method):
+    def wrapper(self, i, record):
+        # 获取当前日期
+        date = self.data.index[i]
+        
+        # 检查是否达到下次运行时间
+        if not hasattr(self, '_next_run_date') or date >= self._next_run_date:
+            # 执行被装饰的方法
+            result = method(self, i, record)
+            
+            self._next_run_date = date + timedelta(days=30)
+            
+            return result
+        
+    return wrapper
