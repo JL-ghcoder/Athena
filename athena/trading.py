@@ -5,6 +5,10 @@ from math import nan, isnan
 
 @dataclass
 class Position:
+    '''
+    订单相关的数据结构，记录每一个订单的基础信息
+    每次next运行完会调用一次update方法来更新Position的last_date与last_price
+    '''
 
     symbol: Optional[str] = None
     open_date: Optional[datetime] = None
@@ -34,7 +38,10 @@ class Position:
 
 @dataclass
 class Trade:
-
+    '''
+    订单被关闭后就会创造一个Trade的数据结构
+    它是一个完整交易的信息
+    '''
     symbol: Optional[str] = None
     short: bool = False
     open_date: Optional[datetime] = None
